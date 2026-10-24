@@ -1,10 +1,20 @@
 # Algebraic tokenization — Lean 4 formalization
 
 Machine-checked formalization (Lean 4 + Mathlib) of the paper
-*Algebraic tokenization: fullness, symmetry, and effective presentations* (Wuming Pan).
+*Algebraic tokenization and the quasitopos of regular heaps* (Wuming Pan, V6, prepared for Applied Categorical Structures).
 
-All results in the paper are formalized with **no `sorry`** and no extra axioms beyond
-Mathlib's standard `propext`, `Classical.choice`, `Quot.sound`.
+The formal proof sources are those of commit `c9955f7`. This README clarifies their scope for the reorganized V6 manuscript; it does not change the proof code. Source comments retain V5 section numbers. The V6 correspondence is given in its Appendix E.
+
+The development formalizes the core categorical constructions and representation results, including the regular-heap quasitopos theorem, the pullback/dependent-product adjunction, and the strong-subobject classifier. The project source contains no `sorry` or additional axiom declarations. The proofs use classical mathematics over Lean and Mathlib.
+
+## Verification scope
+
+- **Structural results:** `AT.mainTheorem` packages finite limits, finite colimits, local cartesian closure and a strong-subobject classifier. The corresponding constructions and regularity proofs are formalized. Principal relational and concrete representation results are also included.
+- **Classical decidability statements:** `AT.RegTS.hom_decidable` and `AT.RegTS.usesShapes_decidable` prove `Nonempty (Decidable P)` using classical logic. Such a proposition can be inhabited classically for any `P`; these declarations do not verify executable decision algorithms. The failure-language equivalence and regularity are proved separately.
+- **Finite search:** `AT.csp_decidable` gives a `Decidable` implementation under explicit finite-type, equality and relation-membership decidability assumptions. No complexity bound is certified by that declaration.
+- **Outside the reported verification:** executable automaton emptiness procedures, an end-to-end executable implementation of the categorical constructions, polynomial/PSPACE/NP bounds, and complexity reductions. Those claims are argued in the paper using the cited results.
+
+A successful build checks the encoded statements. It does not establish that every prose assertion in the manuscript has been formalized. See V6 Section 8 and Appendix E for the exact correspondence and exclusions.
 
 ## Build
 
@@ -16,7 +26,7 @@ lake build
 
 Toolchain: `leanprover/lean4:v4.35.0`, Mathlib v4.35.0 (pinned in `lake-manifest.json`).
 
-## Module map
+## Module map (V5 source numbering)
 
 | Module | Paper |
 |---|---|
